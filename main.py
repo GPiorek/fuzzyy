@@ -1,13 +1,11 @@
-import simpful
+import simpful as sf
 
-def triangle(x,a,b,c):
-    if x < a or x > c:
-        return 0.0
-    if x == b:
-        return 1.0
-    elif x <= b:
-        return (x-a)/(b-a)
-    elif x>=b:
-        return (x-c)/(b-c)
+FS = sf.FuzzySystem(show_banner=False)
+
+near = sf.FuzzySet(points=[[0, 1], [4, 0]], term="near")
+mid = sf.FuzzySet(points=[[0, 0], [4, 1], [8, 0]], term="mid")
+far = sf.FuzzySet(points=[[4, 0], [8, 1], [10, 1]], term="far")
+FS.add_linguistic_variable("dx", sf.LinguisticVariable([near, mid, far]))
 
 
+#print(near.get_value(3), mid.get_value(3), far.get_value(3))
