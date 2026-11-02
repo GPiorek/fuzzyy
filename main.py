@@ -31,3 +31,13 @@ FS.add_linguistic_variable("dy", sf.LinguisticVariable([down, flat, up]))
 
 #test
 print(down.get_value(-1), flat.get_value(-1), up.get_value(-1))
+
+
+#WD
+small = sf.FuzzySet(points=[[1, 1], [2, 0]], term="small")
+med = sf.FuzzySet(points=[[1, 0], [2, 1], [3, 0]], term="med")
+big = sf.FuzzySet(points=[[2, 0], [3, 1]], term="big")
+FS.add_linguistic_variable("wd", sf.LinguisticVariable([small, med, big]))
+
+#test
+print(small.get_value(1.5), med.get_value(1.5), big.get_value(1.5))
