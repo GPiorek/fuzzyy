@@ -20,4 +20,13 @@ med = sf.FuzzySet(points=[[1, 0], [2, 1], [3, 0]], term="med")
 big = sf.FuzzySet(points=[[2, 0], [3, 1]], term="big")
 FS.add_linguistic_variable("wd", sf.LinguisticVariable([small, med, big]))
 
+dx_words = ["near", "mid", "far"]
+dy_words = ["down", "flat", "up"]
+wd_words = ["small","med", "big"]
 
+for a in dx_words:
+    for b in dy_words:
+        for c in wd_words:
+            name = f"F_{a}_{b}_{c}"
+            rule = f"IF(dx IS {a}) AND (dy IS {b}) AND (wd IS {c}) THEN (F IS {name})"
+            print(rule)
