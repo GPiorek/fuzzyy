@@ -24,9 +24,22 @@ dx_words = ["near", "mid", "far"]
 dy_words = ["down", "flat", "up"]
 wd_words = ["small","med", "big"]
 
+dx_range = {"near": 0, "mid": 4, "far": 8}
+dy_range = {"down": -3,"flat": 0,"up": 3}
+wd_range = {"small": 0,"med": 0.5,"big": 1}
+
 for a in dx_words:
     for b in dy_words:
         for c in wd_words:
             name = f"F_{a}_{b}_{c}"
+            reach = dx_range[a] + dy_range[b] + wd_range[c]
+            f = max(0, min(1, reach / 10))
+            FS.set_crisp_output_value(name, f)
             rule = f"IF(dx IS {a}) AND (dy IS {b}) AND (wd IS {c}) THEN (F IS {name})"
-            print(rule)
+            FS.add_rules([rule])
+
+def jump_force(dx, dy, wd):
+    FS.set_variable("dx", dx)
+    FS.set_variable("dy", dy)
+    FS.set_variable("wd", wd)
+    return FS.Sugeno_inference(["F"])["F"]
