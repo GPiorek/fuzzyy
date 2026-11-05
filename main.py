@@ -9,6 +9,7 @@ Dane wejściowe:
 
 Wymagane komendy
     "pip install simpful"
+    "pip install tk" 
     "python main.py"
 
 Autorzy:
