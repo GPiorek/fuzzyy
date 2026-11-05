@@ -46,23 +46,18 @@ med = sf.FuzzySet(points=[[1, 0], [2, 1], [3, 0]], term="med")
 big = sf.FuzzySet(points=[[2, 0], [3, 1]], term="big")
 FS.add_linguistic_variable("wd", sf.LinguisticVariable([small, med, big]))
 
-# Nazwy stanów każdej zmiennej, używane do wygenerowania reguł
-dx_words = ["near", "mid", "far"]
-dy_words = ["down", "flat", "up"]
-wd_words = ["small","med", "big"]
-
-# Wartość liczbowa przypisana każdemu stanowi
-dx_range = {"near": 0, "mid": 4, "far": 8}
-dy_range = {"down": -3,"flat": 0,"up": 3}
-wd_range = {"small": 0,"med": 0.5,"big": 1}
+# Stany każdej zmiennej i przypisane im wartości liczbowe, używane do wygenerowania reguł
+dx_values = {"near": 0, "mid": 4, "far": 8}
+dy_values = {"down": -3, "flat": 0, "up": 3}
+wd_values = {"small": 0, "med": 0.5, "big": 1}
 
 # Tworzy po jednej regule dla każdej kombinacji stanów (3 * 3 * 3 = 27 reguł)
-for a in dx_words:
-    for b in dy_words:
-        for c in wd_words:
+for a in dx_values:
+    for b in dy_values:
+        for c in wd_values:
             # Każda reguła ma własną, stałą wartość wyjściową
             name = f"F_{a}_{b}_{c}"
-            reach = dx_range[a] + dy_range[b] + wd_range[c]
+            reach = dx_values[a] + dy_values[b] + wd_values[c]
             # Skalowanie zasięgu do siły skoku z przedziału 0-1
             f = max(0, min(1, reach / 10))
             FS.set_crisp_output_value(name, f)
